@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>教師成果網站</title>
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      padding: 50px;
-    }
-  </style>
 </head>
 <body>
-  <h1>我的教師成果網站</h1>
-  <p>網站上線成功🔥</p>
+  <h1>教師成果網站</h1>
+  <div id="content">載入中...</div>
+
+  <script>
+    fetch("https://你的-worker網址.workers.dev")
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("content");
+        container.innerHTML = "";
+
+        data.forEach(item => {
+          const div = document.createElement("div");
+
+          div.innerHTML = `
+            <h2>${item.title}</h2>
+            <p>${item.date}</p>
+            <p>${item.summary}</p>
+            <hr>
+          `;
+
+          container.appendChild(div);
+        });
+      });
+  </script>
 </body>
 </html>
